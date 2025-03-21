@@ -6,6 +6,10 @@ import {
 import { Drone, DroneModel, DroneState } from './entities/drone.entity';
 import { CreateDroneDto } from './dto/create-drone.dto';
 import { DroneRepository } from './repositories/drone.repository';
+import { QueryDroneDTO } from './dto/query-drone.dto';
+import { query } from 'express';
+import { Pagination, IPaginationMeta } from 'nestjs-typeorm-paginate';
+import { async } from 'rxjs';
 
 @Injectable()
 export class DroneService {
@@ -38,9 +42,21 @@ export class DroneService {
     }
   }
 
-  async getAllDrones(): Promise<Drone[]> {
+  async getAllDrones(
+    query: QueryDroneDTO,
+  ): Promise<Pagination<Drone, IPaginationMeta>> {
     try {
-      return this.droneRepository.find({});
+      return this.droneRepository.findMany(
+        {
+          page: query.page,
+          limit: query.limit,
+        },
+        {
+          where: {
+            ...(query.state && { state: query.state }),
+          },
+        },
+      );
     } catch (error) {
       throw error;
     }
