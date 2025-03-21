@@ -66,4 +66,26 @@ export class DroneService {
       throw error;
     }
   }
+
+  async getMedications(id: string) {
+    try {
+      return await this.droneRepository.find({
+        where: {
+          medications: {
+            drone: { id },
+          },
+        },
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async updateState(state: DroneState, id: string) {
+    try {
+      return await this.droneRepository.update({ id }, { state });
+    } catch (error) {
+      throw error;
+    }
+  }
 }

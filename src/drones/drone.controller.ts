@@ -30,8 +30,13 @@ export class DroneController {
     return this.droneService.getAllDrones();
   }
 
-  @Get('/battery/:id')
+  @Get(':id/battery')
   checkBatteryLevel(@Param('id', ParseUUIDPipe) id: string) {
     return this.droneService.checkBatteryLevel(id);
+  }
+
+  @Get(':id/medications')
+  getMedications(@Param('id', ParseUUIDPipe) id: string) {
+    return this.droneService.getMedications(id);
   }
 }

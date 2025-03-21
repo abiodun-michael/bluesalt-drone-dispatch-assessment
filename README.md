@@ -27,7 +27,7 @@ The **Drone Dispatch API** is a RESTful service designed to manage a fleet of dr
 ### 1️⃣ **Clone the Repository**
 
 ```sh
-git clone https://github.com/your-repo/drone-dispatch.git
+git clone https://github.com/abiodun-michael/bluesalt-drone-dispatch-assessment.git
 cd drone-dispatch
 ```
 
